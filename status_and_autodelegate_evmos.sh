@@ -27,7 +27,7 @@ sleep 30s
 AMOUNT=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node http://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
 
 DELEGATE=$((AMOUNT - MIN_BALANCE))
-DELEGATE_DENOM=$(echo $DELEGATE/$DENOM | jq -nf /dev/stdin)
+DELEGATE_DENOM=$(echo $DELEGATE/$DENOM | jq -nf /dev/stdin | cut -c1-7)
 
 if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
     echo -e "Delegate"
@@ -35,7 +35,7 @@ if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
     sleep 30s
     
     BAL=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node http://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
-    BAL_DENOM=$(echo $BAL/$DENOM | jq -nf /dev/stdin)
+    BAL_DENOM=$(echo $BAL/$DENOM | jq -nf /dev/stdin | cut -c1-7)
     
     PLACE=$(${BINARY} query staking validators --limit 3000 -oj | jq -r '.validators[] | select(.status=="BOND_STATUS_BONDED") | [(.tokens|tonumber / pow(10;18)), .description.moniker] | @csv' | column -t -s"," | sort -k1 -n -r | nl | grep $MONIKER | tr -d '"')
     
@@ -44,9 +44,8 @@ else
     MSG=$(echo -e "$PLACE \n${BINARY} | $(date +'%d-%m-%Y %H:%M') \nInsufficient balance for delegation")
 fi
 
-echo ${MSG}
 echo "---"
 
 if [[ ${TG_TOKEN} != "" ]]; then
-  $SCRIPT_DIR/telegram -t $TG_TOKEN -c $TG_CHAT_ID -M "${MSG}"
+  $SCRIPT_DIR/telegram -t $TG_TOKEN -c $TG_CHAT_ID -H "${MSG}"
 fi
