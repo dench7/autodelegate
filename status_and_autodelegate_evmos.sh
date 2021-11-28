@@ -4,11 +4,14 @@ export PATH=$PATH:/root/go/bin
 date
 
 # LOAD CONFIG.INI
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 IFS="="
 while read -r name value
 do
 eval $name="$value"
-done < config_evmos.ini
+echo "$name=$value"
+done < $SCRIPT_DIR/config_evmos.ini
 
 # FUNCTIONS
 function sendTg {
