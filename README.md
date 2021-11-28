@@ -50,3 +50,9 @@ Will call every 1 hour 00 min
 0 */1 * * *  /bin/bash /root/scripts/status_and_autodelegate_evmos.sh >> /var/log/status_and_autodelegate_evmos.log
 
 ```
+
+#### To Update
+```
+wget -O $HOME/scripts/status_and_autodelegate_evmos.sh https://raw.githubusercontent.com/maxzonder/autodelegate/main/status_and_autodelegate_evmos.sh \
+&& chmod +x $HOME/scripts/status_and_autodelegate_evmos.sh
+```
