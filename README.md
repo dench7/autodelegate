@@ -50,6 +50,6 @@ crontab -e
 Will call every 1 hour 00 min
 
 ```
-0 */1 * * *  /bin/bash /root/scripts/status_and_autodelegate.sh >> /var/log/status_and_autodelegate_evmos.log
+0 */1 * * *  /bin/bash /root/scripts/status_and_autodelegate_evmos.sh >> /var/log/status_and_autodelegate_evmos.log
 
 ```
