@@ -1,0 +1,2 @@
+# autodelegate
+Cosmos autodelegate script
