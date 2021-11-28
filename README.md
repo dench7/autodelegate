@@ -1,8 +1,3 @@
-
-
-
-
-
 ## Autodelegate and status script with Telegram notifications
 
 ### 1. Install
@@ -19,7 +14,7 @@ wget -nc https://raw.githubusercontent.com/maxzonder/autodelegate/main/config_ev
  
 ```
 
-### 2. Set vars in config_evmos.ini
+### 2. Set vars in `config_evmos.ini`
 
 EXAMPLE
 ```
@@ -30,7 +25,6 @@ ADDRESS=evmos1...
 VALOPER=evmosvaloper1...
 TG_CHAT_ID="34456xx7"
 TG_TOKEN="21dfgdfgd1:AAHi9hjkghjkhgjkhjkhgjkhgjkhgjkY"
-
 BINARY=evmosd
 COIN=aphoton
 COIN_DENOMED=photon
