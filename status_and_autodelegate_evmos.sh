@@ -48,5 +48,5 @@ echo "$MSG"
 echo "---"
 
 if [[ ${TG_TOKEN} != "" ]]; then
-  SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" 'https://api.telegram.org/bot$TG_TOKEN/sendMessage?chat_id=$TG_CHAT_ID&text=${MSG}')  
+  SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_TOKEN/sendMessage?chat_id=$TG_CHAT_ID&text=${MSG}")  
 fi
