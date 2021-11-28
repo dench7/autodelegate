@@ -1,6 +1,6 @@
-# Autodelegate and status script with Telegram notifocations
+## Autodelegate and status script with Telegram notifocations
 
-## 1. Install
+### 1. Install
 
 ```
 cd $HOME
@@ -10,9 +10,9 @@ wget -O https://raw.githubusercontent.com/maxzonder/autodelegate/status_and_auto
 && chmod +x status_and_autodelegate.sh
 ```
 
-## 2. Set vars
+### 2. Set vars in config_evmos.ini
 
-#### EXAMPLE
+EXAMPLE
 ```
 PASS=12345678
 KEY_NAME=WALLET_NAME
@@ -32,7 +32,7 @@ CHAIN=evmos_9000-2
 MIN_BALANCE=1000000000000000
 ```
 
-## 3. Add task in cron
+### 3. Add task in cron
 
 ```
 crontab -e
