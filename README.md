@@ -1,4 +1,4 @@
-## Autodelegate and status script with Telegram notifocations
+## Autodelegate and status script with Telegram notifications
 
 ### 1. Install
 
