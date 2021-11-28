@@ -1,3 +1,8 @@
+
+
+
+
+
 ## Autodelegate and status script with Telegram notifications
 
 ### 1. Install
@@ -5,11 +10,11 @@
 ```
 cd $HOME
 mkdir scripts
+
+wget -O $HOME/scripts/status_and_autodelegate_evmos.sh https://raw.githubusercontent.com/maxzonder/autodelegate/main/status_and_autodelegate_evmos.sh \
+&& chmod +x $HOME/scripts/status_and_autodelegate_evmos.sh
+
 cd scripts
-
-wget -O status_and_autodelegate_evmos.sh https://raw.githubusercontent.com/maxzonder/autodelegate/main/status_and_autodelegate_evmos.sh \
-&& chmod +x status_and_autodelegate_evmos.sh
-
 wget -nc https://raw.githubusercontent.com/maxzonder/autodelegate/main/config_evmos.ini
 ```
 
