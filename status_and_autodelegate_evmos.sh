@@ -8,7 +8,7 @@ IFS="="
 while read -r name value
 do
 eval $name="$value"
-done < ./config.ini
+done < config_evmos.ini
 
 # FUNCTIONS
 function sendTg {
