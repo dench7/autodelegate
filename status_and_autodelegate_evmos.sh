@@ -39,14 +39,14 @@ if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
     
     PLACE=$(${BINARY} query staking validators --limit 3000 -oj | jq -r '.validators[] | select(.status=="BOND_STATUS_BONDED") | [(.tokens|tonumber / pow(10;18)), .description.moniker] | @csv' | column -t -s"," | sort -k1 -n -r | nl | grep $MONIKER | tr -d '"')
     
-    MSG=$(echo -e "$PLACE %0A${BINARY} | $(date +'%d-%m-%Y %H:%m') %0ADelegated: ${DELEGATE_DENOM}${COIN_DENOMED} %0ABalance: ${BAL_DENOM}${COIN_DENOMED}")
+    MSG=$(echo -e "<b>$PLACE</b> \n${BINARY} | $(date +'%d-%m-%Y %H:%M') \n<pre>Delegated: ${DELEGATE_DENOM}${COIN_DENOMED} \n  Balance: ${BAL_DENOM}${COIN_DENOMED}</pre>")
 else
-    MSG=$(echo -e "$PLACE %0A${BINARY} | $(date +'%d-%m-%Y %H:%m') %0AInsufficient balance for delegation")
+    MSG=$(echo -e "$PLACE \n${BINARY} | $(date +'%d-%m-%Y %H:%M') \nInsufficient balance for delegation")
 fi
 
-echo "$MSG"
+echo ${MSG}
 echo "---"
 
 if [[ ${TG_TOKEN} != "" ]]; then
-  SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_TOKEN/sendMessage?chat_id=$TG_CHAT_ID&text=${MSG}")  
+  $SCRIPT_DIR/telegram -t $TG_TOKEN -c $TG_CHAT_ID -M "${MSG}"
 fi
