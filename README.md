@@ -7,10 +7,10 @@ cd $HOME
 mkdir scripts
 cd scripts
 
-wget -O https://raw.githubusercontent.com/maxzonder/autodelegate/status_and_autodelegate.sh \
+wget -O "https://raw.githubusercontent.com/maxzonder/autodelegate/main/status_and_autodelegate_evmos.sh" \
 && chmod +x status_and_autodelegate.sh
 
-wget https://raw.githubusercontent.com/maxzonder/autodelegate/config_evmos.ini
+wget "https://raw.githubusercontent.com/maxzonder/autodelegate/main/config_evmos.ini"
 ```
 
 ### 2. Set vars in config_evmos.ini
