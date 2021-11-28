@@ -3,24 +3,12 @@
 export PATH=$PATH:/root/go/bin
 date
 
-# SET VARS
-PASS=12345678
-KEY_NAME=WALLET_NAME
-MONIKER=NODE_NAME
-ADDRESS=evmos1... 
-VALOPER=evmosvaloper1...
-TG_CHAT_ID="34456xx7"
-TG_TOKEN="21dfgdfgd1:AAHi9hjkghjkhgjkhjkhgjkhgjkhgjkY"
-
-# SYSTEM VARS
-BINARY=evmosd
-COIN=aphoton
-COIN_DENOMED=photon
-FEE=6000${COIN}
-DENOM=1000000000000000000
-RPC_PORT=26657
-CHAIN=evmos_9000-2
-MIN_BALANCE=1000000000000000
+# LOAD CONFIG.INI
+IFS="="
+while read -r name value
+do
+eval $name="$value"
+done < config.ini
 
 # FUNCTIONS
 function sendTg {
