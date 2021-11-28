@@ -3,6 +3,9 @@
 ## 1. Install
 
 ```
+cd $HOME
+mkdir scripts
+cd scripts
 wget -O https://raw.githubusercontent.com/maxzonder/autodelegate/status_and_autodelegate.sh \
 && chmod +x status_and_autodelegate.sh
 ```
