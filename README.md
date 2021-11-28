@@ -38,8 +38,8 @@ MIN_BALANCE=1000000000000000
 crontab -e
 ```
  
-Will call every time
+Will call every 1 hour 00 min
 
 ```
-0 */1 * * *  /bin/bash /root/Umee_alert_TG/Umee_alert_TG.sh
+0 */1 * * *  /bin/bash /scripts/status_and_autodelegate.sh
 ```
