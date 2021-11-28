@@ -8,7 +8,6 @@
 ### 1. Install
 
 ```
-
 cd $HOME
 mkdir scripts
 
@@ -17,7 +16,7 @@ wget -O $HOME/scripts/status_and_autodelegate_evmos.sh https://raw.githubusercon
 
 cd scripts
 wget -nc https://raw.githubusercontent.com/maxzonder/autodelegate/main/config_evmos.ini
-
+ 
 ```
 
 ### 2. Set vars in config_evmos.ini
