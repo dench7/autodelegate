@@ -12,15 +12,16 @@ eval $name="$value"
 done < $SCRIPT_DIR/config_evmos.ini
 
 # START HERE    
-echo -e "Withdraw rewards"
-echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} \
-  --commission \
-  --from ${KEY_NAME} \
-  --gas auto \
-  --chain-id=${CHAIN} \
-  --fees ${FEE}${COIN} \
-  --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
-  
+echo "Withdraw commission"
+
+echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} --commission --from ${KEY_NAME} --gas auto --chain-id=${CHAIN} --fees ${FEE}${COIN} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
+
+sleep 10s
+
+echo "Withdraw rewards"
+
+echo $PASS | ${BINARY} tx distribution withdraw-all-rewards --from ${KEY_NAME} --gas auto --fees ${FEE}${COIN} --chain-id=${CHAIN} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
+
 sleep 30s
 
 AMOUNT=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node http://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
@@ -36,16 +37,16 @@ if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
     BAL=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node http://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
     BAL_DENOM=$(echo $BAL/$DENOM | jq -nf /dev/stdin)
     
-    PLACE=$(${BINARY} query staking validators --limit 3000 -oj | jq -r '.validators[] | select(.status=="BOND_STATUS_BONDED") | [(.tokens|tonumber / pow(10;18)), .description.moniker] | @csv' | column -t -s"," | sort -k1 -n -r | nl | grep $MONIKER)
+    PLACE=$(${BINARY} query staking validators --limit 3000 -oj | jq -r '.validators[] | select(.status=="BOND_STATUS_BONDED") | [(.tokens|tonumber / pow(10;18)), .description.moniker] | @csv' | column -t -s"," | sort -k1 -n -r | nl | grep $MONIKER | tr -d '"')
     
     MSG=$(echo -e "$PLACE %0A${BINARY} | $(date +'%d-%m-%Y %H:%m') %0ADelegated: ${DELEGATE_DENOM}${COIN_DENOMED} %0ABalance: ${BAL_DENOM}${COIN_DENOMED}")
 else
     MSG=$(echo -e "$PLACE %0A${BINARY} | $(date +'%d-%m-%Y %H:%m') %0AInsufficient balance for delegation")
 fi
 
-echo -e "$MSG"
+echo "$MSG"
 echo "---"
 
 if [[ ${TG_TOKEN} != "" ]]; then
-    SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${MSG}")
+  SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" 'https://api.telegram.org/bot$TG_TOKEN/sendMessage?chat_id=$TG_CHAT_ID&text=${MSG}')  
 fi
