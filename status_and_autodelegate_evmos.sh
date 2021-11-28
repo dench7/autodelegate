@@ -5,20 +5,11 @@ date
 
 # LOAD CONFIG.INI
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-
 IFS="="
 while read -r name value
 do
 eval $name="$value"
 done < $SCRIPT_DIR/config_evmos.ini
-
-# FUNCTIONS
-function sendTg {
-  if [[ ${TG_TOKEN} != "" ]]; then
-    local tg_msg="$@"
-    SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_TOKEN/sendMessage?chat_id=$TG_CHAT_ID&text=${tg_msg}")
-  fi
-}
 
 # START HERE    
 echo -e "Withdraw rewards"
@@ -48,13 +39,13 @@ if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
     PLACE=$(${BINARY} query staking validators --limit 3000 -oj | jq -r '.validators[] | select(.status=="BOND_STATUS_BONDED") | [(.tokens|tonumber / pow(10;18)), .description.moniker] | @csv' | column -t -s"," | sort -k1 -n -r | nl | grep $MONIKER)
     
     MSG=$(echo -e "$PLACE %0A${BINARY} | $(date +'%d-%m-%Y %H:%m') %0ADelegated: ${DELEGATE_DENOM}${COIN_DENOMED} %0ABalance: ${BAL_DENOM}${COIN_DENOMED}")
-    echo -e "$MSG"
-    echo "---"
-    sendTg ${MSG}
-    
 else
     MSG=$(echo -e "$PLACE %0A${BINARY} | $(date +'%d-%m-%Y %H:%m') %0AInsufficient balance for delegation")
-    echo -e "$MSG"
-    echo "---"
-    sendTg ${MSG}
+fi
+
+echo -e "$MSG"
+echo "---"
+
+if [[ ${TG_TOKEN} != "" ]]; then
+    SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${MSG}")
 fi
