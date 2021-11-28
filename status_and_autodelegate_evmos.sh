@@ -25,7 +25,7 @@ echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} \
   --from ${KEY_NAME} \
   --gas auto \
   --chain-id=${CHAIN} \
-  --fees ${FEE} \
+  --fees ${FEE}${COIN} \
   --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
   
 sleep 30s
@@ -37,7 +37,7 @@ DELEGATE_DENOM=$(echo $DELEGATE/$DENOM | jq -nf /dev/stdin)
 
 if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
     echo -e "Delegate"
-    echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
+    echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE}${COIN} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
     sleep 30s
     
     BAL=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node http://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
