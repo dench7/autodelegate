@@ -8,7 +8,7 @@ IFS="="
 while read -r name value
 do
 eval $name="$value"
-done < config.ini
+done < ./config.ini
 
 # FUNCTIONS
 function sendTg {
