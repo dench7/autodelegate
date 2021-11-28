@@ -3,17 +3,14 @@
 ### 1. Install
 
 ```
-# make dir for script
 cd $HOME
 mkdir scripts
 cd scripts
 
-# download and chmod
 wget -O https://raw.githubusercontent.com/maxzonder/autodelegate/status_and_autodelegate.sh \
 && chmod +x status_and_autodelegate.sh
 
 wget https://raw.githubusercontent.com/maxzonder/autodelegate/config_evmos.ini
-
 ```
 
 ### 2. Set vars in config_evmos.ini
