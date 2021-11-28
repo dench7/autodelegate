@@ -7,10 +7,10 @@ cd $HOME
 mkdir scripts
 cd scripts
 
-wget -O "https://raw.githubusercontent.com/maxzonder/autodelegate/main/status_and_autodelegate_evmos.sh" \
-&& chmod +x status_and_autodelegate.sh
+wget -O status_and_autodelegate_evmos.sh https://raw.githubusercontent.com/maxzonder/autodelegate/main/status_and_autodelegate_evmos.sh \
+&& chmod +x status_and_autodelegate_evmos.sh
 
-wget "https://raw.githubusercontent.com/maxzonder/autodelegate/main/config_evmos.ini"
+wget -nc https://raw.githubusercontent.com/maxzonder/autodelegate/main/config_evmos.ini
 ```
 
 ### 2. Set vars in config_evmos.ini
@@ -28,7 +28,7 @@ TG_TOKEN="21dfgdfgd1:AAHi9hjkghjkhgjkhjkhgjkhgjkhgjkY"
 BINARY=evmosd
 COIN=aphoton
 COIN_DENOMED=photon
-FEE=6000${COIN}
+FEE=6000
 DENOM=1000000000000000000
 RPC_PORT=26657
 CHAIN=evmos_9000-2
