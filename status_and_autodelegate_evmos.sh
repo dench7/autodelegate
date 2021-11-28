@@ -10,7 +10,6 @@ IFS="="
 while read -r name value
 do
 eval $name="$value"
-echo "$name=$value"
 done < $SCRIPT_DIR/config_evmos.ini
 
 # FUNCTIONS
