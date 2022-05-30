@@ -13,7 +13,7 @@ wget -O $HOME/scripts/status_and_autodelegate.sh https://raw.githubusercontent.c
 && chmod +x $HOME/scripts/status_and_autodelegate.sh
 
 cd scripts
-wget -nc https://raw.githubusercontent.com/maxzonder/autodelegate/main/config_evmos.ini
+wget -nc https://raw.githubusercontent.com/dench7/autodelegate/main/config.ini
  
 ```
 
@@ -47,12 +47,6 @@ crontab -e
 Will call every 1 hour 00 min
 
 ```
-0 */1 * * *  /bin/bash /root/scripts/status_and_autodelegate_evmos.sh >> /var/log/status_and_autodelegate_evmos.log
+0 */1 * * *  /bin/bash /root/scripts/status_and_autodelegate.sh >> /var/log/status_and_autodelegate.log
 
-```
-
-#### To Update
-```
-wget -O $HOME/scripts/status_and_autodelegate_evmos.sh https://raw.githubusercontent.com/maxzonder/autodelegate/main/status_and_autodelegate_evmos.sh \
-&& chmod +x $HOME/scripts/status_and_autodelegate_evmos.sh
 ```
