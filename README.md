@@ -9,7 +9,7 @@ mkdir scripts
 wget -O $HOME/scripts/telegram https://raw.githubusercontent.com/fabianonline/telegram.sh/master/telegram && \
 chmod +x $HOME/scripts/telegram
 
-wget -O $HOME/scripts/status_and_autodelegate.sh https://raw.githubusercontent.com/maxzonder/autodelegate/main/status_and_autodelegate_evmos.sh \
+wget -O $HOME/scripts/status_and_autodelegate.sh https://raw.githubusercontent.com/dench7/autodelegate/main/status_and_autodelegate.sh \
 && chmod +x $HOME/scripts/status_and_autodelegate.sh
 
 cd scripts
