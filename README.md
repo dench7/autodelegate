@@ -19,6 +19,9 @@ wget -nc https://raw.githubusercontent.com/dench7/autodelegate/main/config.ini
 
 ### 2. Set vars in `config.ini`
 
+cd scripts
+nano config.ini
+
 EXAMPLE
 ```
 PASS=12345678
