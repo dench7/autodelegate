@@ -17,7 +17,7 @@ wget -nc https://raw.githubusercontent.com/dench7/autodelegate/main/config.ini
  
 ```
 
-### 2. Set vars in `config_evmos.ini`
+### 2. Set vars in `config.ini`
 
 EXAMPLE
 ```
