@@ -9,7 +9,7 @@ IFS="="
 while read -r name value
 do
 eval $name="$value"
-done < $SCRIPT_DIR/config_evmos.ini
+done < $SCRIPT_DIR/config.ini
 
 # START HERE    
 echo "Withdraw commission"
